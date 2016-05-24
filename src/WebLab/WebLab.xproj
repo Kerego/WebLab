@@ -13,6 +13,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
+    <ApplicationInsightsResourceId>/subscriptions/956b088f-ba97-417a-a425-866865bb4e94/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/WebLab</ApplicationInsightsResourceId>
   </PropertyGroup>
   <ItemGroup>
     <DnxInvisibleContent Include="bower.json" />

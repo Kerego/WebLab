@@ -1,34 +1,99 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+	font-family: Georgia, serif;
+	height: 100%;
+	margin: 0;
+	text-align: center;
+	width: 100%;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.hero {
+	background-image: url('../images/pizza-back.jpg');
+	background-position: center top;
+	background-size: cover;
+	padding: 80px 200px 600px 0;
+	text-shadow: 0 2px #000000;
+	font-family: 'Trebuchet MS', 'Helvetica';
+	width: 100%;
 }
 
-/* Set widths on the form inputs since otherwise they're 100% wide */
-input,
-select,
-textarea {
-    max-width: 280px;
+.hero .left {
+	width: 50%;
+	float:left;
 }
 
-/* Carousel */
-.carousel-caption {
-    z-index: 10 !important;
+.hero .right {
+	float: right;
+	width: 50%;
 }
 
-    .carousel-caption p {
-        font-size: 20px;
-        line-height: 1.4;
-    }
+.hero h1 {
+	font-size: 32px;
+}
 
-@media (min-width: 768px) {
-    .carousel-caption {
-        z-index: 10 !important;
-    }
+.hero h2 {
+	color: #ffffff;
+	font-size: 56px;
+}
+
+.hero p {
+	color: #ffffff;
+	font-size: 2em;
+}
+
+.rightmenu {
+	text-shadow: none;
+	font-size: 72px;
+	list-style-type: none;
+	text-anchor:end;
+	background-color: rgba(255, 255, 255, 0.65);
+	color: black;
+	margin: 5px 150px;
+	width: 65%;
+	border: none;
+	text-decoration: none;
+}
+
+.footmenu{
+	background-color: rgba(255,255,255, 0.65);
+	padding: 10px;
+	margin:10px;
+}
+
+li a{
+	color: black;
+	text-decoration: none;
+	align-content:center;
+}
+
+button {
+	text-shadow: none;
+	font-size: 72px;
+	list-style-type: none;
+	text-anchor:end;
+	background-color: rgba(255, 255, 255, 0.65);
+	color: black;
+	margin: 5px;
+	width: 65%;
+	border: none;
+	
+}
+
+#footer {
+	color: DarkSlateGray;
+	font-size: 16px;
+}
+
+img {
+	height: 200px;
+	width: 300px;
+	background-color: transparent;
+}
+
+figure{
+	display:inline-block;
+	padding: 10px;
+}
+
+.images-container{
+	text-align:center;
 }

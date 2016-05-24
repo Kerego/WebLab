@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+	<style>
+	</style>
+</head>
+<body style="width:100%; height:100%; margin: 0; padding: 0;">
+	<canvas id="canvas" style="display:block">
+		
+	</canvas>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		ctx.canvas.width = window.innerWidth;
+		ctx.canvas.height = window.innerHeight;
+		var circles = [];
+		var colors = ['#A6A938', '#789E35', '#8B2E5F', '#5A2971'];
+		var centerX = canvas.width / 2;
+		var centerY = canvas.height / 2;
+		var innerRadius = 20;
+
+		var radius = 5;
+
+		for (var i = 0; i < 1000; i++) {
+			var p = Math.random();
+			var x = centerX + innerRadius * Math.cos(2 * Math.PI * p);
+			var y = centerY + innerRadius * Math.sin(2 * Math.PI * p);
+			var circle = new Circle(x, y, radius*Math.random() + 1.25, colors[Math.floor(i % 4)]);
+			var r = innerRadius + 20 + Math.random() * 80;
+			circle.innerX = x;
+			circle.outerX = centerX + r * Math.cos(2 * Math.PI * p);
+			circle.innerY = y;
+			circle.outerY = centerY + r * Math.sin(2 * Math.PI * p);
+			circles.push(circle);
+		}
+
+		function sleepFor(sleepDuration) {
+			var now = new Date().getTime();
+			while (new Date().getTime() < now + sleepDuration) { /* do nothing */ }
+		}
+
+		var mouseX = 0;
+		var mouseY = 0;
+		canvas.onmousemove = function (e) {
+			mouseX = e.x;
+			mouseY = e.y;
+		}
+
+		// Circle object
+		function Circle(x, y, rad, color) {
+			var _this = this;
+			var maxDist = 120;
+			// constructor
+			(function () {
+				_this.x = x || null;
+				_this.y = y || null;
+				_this.radius = rad || null;
+				_this.color = color || null;
+				_this.lastX = []
+				_this.lastY = []
+			})();
+
+			this.update = function () {
+				
+				var dist = this.distance(_this.x, _this.y, mouseX, mouseY);
+				this.y += 10 * (Math.random() - 0.5);
+				this.x += 10 * (Math.random() - 0.5);
+
+				if (this.y < 0 && this.y > 768)
+					this.y = 384;
+				if (this.x < 0 && this.x > 1366)
+					this.x = 683;
+
+				if (dist > maxDist)
+					return;
+
+				if (Math.abs(Math.abs(this.x - mouseX) - Math.abs(this.y - mouseY)) < 10)
+				{
+					this.x += 100 / (this.x - mouseX);
+					this.y += 100 / (this.y - mouseY);
+				}
+
+				else if (Math.abs(this.x - mouseX) - Math.abs(this.y - mouseY) > 10) {
+					this.x += 100 / (this.x - mouseX);
+				}
+
+				else if (Math.abs(this.x - mouseX) - Math.abs(this.y - mouseY) < -10) {
+					this.y += 100 / (this.y - mouseY);
+				}
+			}
+
+			this.nonzero = function(x)
+			{
+				return Math.abs(x) < 2 ? Math.sign(x) : x;
+			}
+
+			this.distance = function(x1, y1, x2, y2)
+			{
+				return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+			}
+
+			this.draw = function (ctx) {
+				if (!_this.x || !_this.y || !_this.radius || !_this.color) {
+					console.error('Circle requires an x, y, radius and color');
+					return;
+				}
+				ctx.beginPath();
+				ctx.arc(_this.x, _this.y, _this.radius, 0, 2 * Math.PI, false);
+				ctx.fillStyle = _this.color;
+				ctx.fill();
+			};
+		}
+
+		// animation loop
+		function loop() {
+			ctx.clearRect(0, 0, 1366, 768);
+			for (var i = 0; i < circles.length; i++) {
+				circles[i].update();
+				circles[i].draw(ctx);
+			}
+
+			//for (var i = 0; i < circles.length; i++) {
+			//	ctx.strokeStyle = circles[i].color;
+			//	ctx.beginPath()
+			//	for (var j = 0; j < circles[i].lastX.length - 1; j++) {
+			//		ctx.moveTo(circles[i].lastX[j], circles[i].lastY[j]);
+			//		ctx.lineTo(circles[i].lastX[j + 1], circles[i].lastY[j + 1]);
+			//	}
+				
+			//	ctx.stroke();
+			//}
+			requestAnimationFrame(loop);
+		}
+
+		// start the loop
+		loop();
+		
+
+
+
+
+
+	</script>
+</body>
+</html>
